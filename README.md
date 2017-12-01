@@ -63,3 +63,51 @@ Hints: a consumer thread can only remove message successfully when the queue is
 not empty (line 55); is it possible for two consumer threads to see the same
 last item in the queue (see the queue is not empty) and proceeds to try to
 remove the same element? Can both threads remove a message successfully?
+
+## Producer Consumer with Monitor
+The previous program has race conditions because of the concurrent access to
+a shared queue from multiple threads. The ```LinkedList``` API specification
+warns us about it: ["Note that this implementation is not synchronized."](
+http://docs.oracle.com/javase/7/docs/api/java/util/LinkedList.html)
+
+Additionally, consumers wait on the empty queue in a tight loop is not
+desirable as it wastes CPU time. In this example we will use Java monitors to
+synchronize the access to the shared buffer from multiple concurrent threads.
+Recall that a monitor in Java is an object with ```synchronized``` methods.
+A monitor ensures only one thread can by executing/in any of the synchronized
+methods at any given time. We can use a monitor to achieve mutual exclusion
+because each thread trying to execute synchronized code must compete for the
+*lock* associated with the monitor.
+
+After a thread obtains a lock it may not be able to proceed, e.g. a consumer
+cannot consume till there are things to beconsumed. This is a synchronization
+problem. While in synchronized code a thread can call ```wait()```, which
+releases the lock and cause the thread to sleep on the monitor
+(object with synchronized code). To wake a sleeping thread on a monitor, another
+thread needs to call ```notify()``` in synchronized code of the same monitor.
+While ```notify()``` awakens one sleeping thread, ```notifyAll()``` awakens all
+sleeping threads on the monitor. Either way the newly awakened threads will
+compete for the lock when they attempt to execute synchronized code.
+
+A new ```SafeBuffer``` class is used to wrap around and protect the
+```LinkedList``` object that implements the shared buffer.
+By adding the “synchronized” keyword in the signatures of both ```add()```
+and ```remove()``` methods, we make each ```SafeBuffer``` object a monitor.
+
+Run this program several times and increase the number of producers and
+consumers if you want.
+
+* Do you see any leftover messages in the end?
+
+The wait() method causes the call thread to sleep on the monitor object, which
+has the synchronized method. Before the thread goes to sleep it release the
+lock to the monitor and once the thread is awakened it will compete for the
+lock because it will attempt to execute the next instruction
+(after the wait() call), which is defined in a synchronized method.
+
+* Why do you think the wait() method is called in a while loop?
+
+Note that the produce will call ```notifyAll()``` after adding a message to
+wake up all waiting consumers. What if two consumers try to consume the only
+message in the queue? Please use some concrete scenarios to prove the
+correctness of this solution.
