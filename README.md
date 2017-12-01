@@ -30,3 +30,23 @@ the counter object.
 
 * Does the output look correct? Why?
 * Explain what may have caused the issue.
+
+## Producer Consumer
+This example allows a number of threads to communicate via a shared queue
+(linked list) illustrating the classic “Producer Consumer Problem”. There are
+two types of threads: producer thread and consumer thread. A producer thread
+produces messages and push them into the queue. A consumer thread fetches
+messsages by popping the queue. A queue interface is used as the abstraction of
+the shared message buffer. Such a queue can be implemented using a circular
+array, a linked list, or other data structures.
+
+Note that a consumer thread only attemps to remove a message from the queue if
+the queue is not empty because otherwise a NoSuchElementException will be
+thrown by the queue. If a consumer thread sees an empty queue, it simply retries
+later (busy wait). In the end, when all threads finishes, the main thread print
+the messages left in the queue.
+
+If the program works correctly there should be NO leftover messages in the queue.
+Run this program to see what you can get.
+
+
