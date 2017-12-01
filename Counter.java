@@ -41,9 +41,11 @@ class Updator extends Thread {
       } else {
         counter.decrement();
       }
+/*
       try{
         Thread.sleep((long)(Math.random()));
       }catch(InterruptedException e){}
+*/
     }
   }
 }

@@ -22,11 +22,13 @@ class SimpleThread extends Thread{
       // the getName() method will return a different
       // name for different thread
       System.out.println("from thread "+getName()+" i="+i);
+/*
       // pause this thread for a short while to be nice
       // to other threads.
       try{
         sleep((long)(Math.random()*1000));
       }catch(InterruptedException e){}
+*/
     }
     System.out.println("Done! "+getName());
   }
