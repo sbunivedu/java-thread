@@ -49,4 +49,17 @@ the messages left in the queue.
 If the program works correctly there should be NO leftover messages in the queue.
 Run this program to see what you can get.
 
+* How many total messages are sent and received in the program?
+* Run this program at least 10 times. Does the output seem correct?
 
+If you see any leftover messages in the queue? If you don’t, try doubling the
+number of producers and the number of consumers (lines 10 and 11) to increase
+the contention level. Any leftover message in the queue shows the program is
+incorrect. Sometimes you will see ```NoSuchElementException``` or
+```NullPointerException``` in the output. What do you think could cause
+such exceptions?
+
+Hints: a consumer thread can only remove message successfully when the queue is
+not empty (line 55); is it possible for two consumer threads to see the same
+last item in the queue (see the queue is not empty) and proceeds to try to
+remove the same element? Can both threads remove a message successfully?
