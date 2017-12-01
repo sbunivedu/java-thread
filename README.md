@@ -111,3 +111,16 @@ Note that the produce will call ```notifyAll()``` after adding a message to
 wake up all waiting consumers. What if two consumers try to consume the only
 message in the queue? Please use some concrete scenarios to prove the
 correctness of this solution.
+
+## Producer Consumer with a Thread-safe Queue
+The previous solution to the producer consumer problem works correctly but it
+is still tedious for programmers to use. Fortunately, thread-safe data
+structures have been added to Java so that synchronized access to those
+data structures can be guaranteed. A producer thread will block on a full queue
+and consumer threads will block on an empty queue automatically, which
+simplifies programming significantly.
+
+In this example we use the thread-safe [```ArrayBlockingQueue```](
+http://tutorials.jenkov.com/java-util-concurrent/blockingqueue.html).
+
+
