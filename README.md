@@ -41,7 +41,7 @@ the shared message buffer. Such a queue can be implemented using a circular
 array, a linked list, or other data structures.
 
 Note that a consumer thread only attemps to remove a message from the queue if
-the queue is not empty because otherwise a NoSuchElementException will be
+the queue is not empty because otherwise a `NoSuchElementException` will be
 thrown by the queue. If a consumer thread sees an empty queue, it simply retries
 later (busy wait). In the end, when all threads finishes, the main thread print
 the messages left in the queue.

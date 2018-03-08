@@ -10,9 +10,13 @@ class SimpleRunnable implements Runnable{
     for (int i=0; i<10; i++){
       System.out.println("from thread "+
         Thread.currentThread().getName()+" i="+i);
+/*
+      // pause this thread for a short while to be nice
+      // to other threads.
       try{
         Thread.sleep((long)(Math.random()*1000));
       }catch(InterruptedException e){}
+*/
     }
     System.out.println("Done! "+Thread.currentThread().getName());
   }
