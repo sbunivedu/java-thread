@@ -1,7 +1,7 @@
 public class TwoRunnablesTest {
   public static void main(String[] args){
     new Thread(new SimpleRunnable(), "a").start();
-    new Thread(new SimpleRunnable(), "b\t").start();
+    new Thread(new SimpleRunnable(), "b\t\t").start();
   }
 }
 
@@ -10,14 +10,7 @@ class SimpleRunnable implements Runnable{
     for (int i=0; i<10; i++){
       System.out.println("from thread "+
         Thread.currentThread().getName()+" i="+i);
-/*
-      // pause this thread for a short while to be nice
-      // to other threads.
-      try{
-        Thread.sleep((long)(Math.random()*1000));
-      }catch(InterruptedException e){}
-*/
     }
-    System.out.println("Done! "+Thread.currentThread().getName());
+    System.out.println("End of "+Thread.currentThread().getName());
   }
 }

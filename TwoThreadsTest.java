@@ -2,7 +2,7 @@ public class TwoThreadsTest {
   public static void main(String[] args){
     // create two thread objects with different names.
     new SimpleThread("a").start();
-    new SimpleThread("b\t").start();
+    new SimpleThread("b\t\t").start();
   }
 }
 
@@ -22,14 +22,7 @@ class SimpleThread extends Thread{
       // the getName() method will return a different
       // name for different thread
       System.out.println("from thread "+getName()+" i="+i);
-/*
-      // pause this thread for a short while to be nice
-      // to other threads.
-      try{
-        sleep((long)(Math.random()*1000));
-      }catch(InterruptedException e){}
-*/
     }
-    System.out.println("Done! "+getName());
+    System.out.println("End of "+getName());
   }
 }
