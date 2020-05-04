@@ -6,7 +6,12 @@ tasks and two ways to make shared/concurrent data structures thread-safe.
 ## Two threads
 `TwoThreadsTest.java` defines a `SimpleThread` by extending the `Thread` class. The `main` method creates two instances of the `SimpleThread` class and use them to execute two independent tasks (the same code). Each task prints the current value of `i` in a loop.
 
-* Does the console/standard output look different every time you run the program?
+You can compile and run the program as follows:
+```
+javac TwoThreadsTest.java
+java TwoThreadsTest
+```
+* Run the program a number of times. Does the console/standard output look different every time you run the program?
 * Explain why the output from the two threads are interleaved.
 * Does each thread prints its own lines in the correct order? Why?
 
@@ -21,6 +26,11 @@ object and the other thread decrement the count by calling the
 thread object it will cause the calling thread to wait for this thread to
 finish so that it can join the "main" thread. In the example it is necessary for the main thread to wait for the two "Updator" threads to finish in order to print the final value in the counter object.
 
+You can compile and run the program as follows:
+```
+javac Counter.java
+java Counter
+```
 * Does the output look correct? Why?
 * Explain what may have caused the issue.
 
